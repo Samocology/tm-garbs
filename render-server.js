@@ -1,18 +1,22 @@
 import { createServer } from "node:http";
 
-// Try importing the module differently
 const serverModule = await import("./dist/server/server.js");
-const handler = serverModule.default || serverModule.handler || serverModule;
+const handler = serverModule.default;
+
+console.log('Default export type:', typeof handler);
+console.log('Default export keys:', Object.keys(handler));
+
+// Try these possibilities
+const actualHandler = handler.default || handler.fetch || handler.handler || handler.handleRequest || handler;
 
 const PORT = process.env.PORT || 3000;
 
 const server = createServer(async (req, res) => {
   try {
-    if (typeof handler === 'function') {
-      await handler(req, res);
+    if (typeof actualHandler === 'function') {
+      await actualHandler(req, res);
     } else {
-      console.log('Handler type:', typeof handler);
-      console.log('Available exports:', Object.keys(serverModule));
+      console.log('Still not a function. Properties:', Object.getOwnPropertyNames(handler));
       res.statusCode = 500;
       res.end("Server misconfiguration");
     }
