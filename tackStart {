@@ -1,0 +1,27 @@
+warning: in the working copy of 'vite.config.ts', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/vite.config.ts b/vite.config.ts[m
+[1mindex 2b8ccd1..6176a94 100644[m
+[1m--- a/vite.config.ts[m
+[1m+++ b/vite.config.ts[m
+[36m@@ -1,15 +1,8 @@[m
+[31m-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually[m
+[31m-// or the app will break with duplicate plugins:[m
+[31m-//   - tanstackStart, viteReact, tailwindcss, tsConfigPaths, nitro (build-only using cloudflare as a default target),[m
+[31m-//     componentTagger (dev-only), VITE_* env injection, @ path alias, React/TanStack dedupe,[m
+[31m-//     error logger plugins, and sandbox detection (port/host/strictPort).[m
+[31m-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.[m
+[31m-import { defineConfig } from "@lovable.dev/vite-tanstack-config";[m
+[31m-[m
+ export default defineConfig({[m
+   tanstackStart: {[m
+[31m-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).[m
+[31m-    // nitro/vite builds from this[m
+     server: { entry: "server" },[m
+[31m-  },[m
+[31m-});[m
+[32m+[m[32m    nitro: {[m
+[32m+[m[32m      preset: 'vercel'[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m[32m});[m
+\ No newline at end of file[m
