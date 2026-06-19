@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: tmgarbs
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: node render-server.js
+  
